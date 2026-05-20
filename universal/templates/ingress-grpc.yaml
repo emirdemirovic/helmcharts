@@ -10,7 +10,7 @@ metadata:
     {{- toYaml .Values.ingressGrpc.annotations | nindent 4 }}
 spec:
   rules:
-    - host: {{ .Values.ingressGrpc.host | quote }}
+    - host: {{ .Values.ingressGrpc.host | default .Values.ingress.host | quote }}
       http:
         paths:
           {{- if .Values.ingressGrpc.paths }}

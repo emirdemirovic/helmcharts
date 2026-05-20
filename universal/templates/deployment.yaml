@@ -52,7 +52,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .secretName }}
-                  key: {{ .key }}
+                  key: {{ .key | default .name }}
           {{- end }}
           {{- end }}
           {{- if .Values.command }}
