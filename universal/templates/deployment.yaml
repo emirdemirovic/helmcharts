@@ -131,6 +131,13 @@ spec:
           nfs:
             {{- toYaml .nfs | nindent 12 }}
         {{- end }}
+        {{- if .persistentVolumeClaim }}
+          persistentVolumeClaim:
+            {{- toYaml .persistentVolumeClaim | nindent 12 }}
+        {{- else if .pvcName }}
+          persistentVolumeClaim:
+            claimName: {{ $.Release.Name }}-{{ .pvcName }}
+        {{- end }}
       {{- end }}
       {{- range .Values.deploymentVolumes }}
         - name: {{ .name }}
